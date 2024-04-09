@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  web:
+    image: rashid5925/foodordering
+    container_name: foodordering
+    ports:
+      - "3000:3000"
+    restart: always
+    
+    depends_on:
+      - database
+    networks:
+      - mern-network
+  
+  database:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/ubuntu/mongo-backup:/data/db
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
